@@ -156,18 +156,6 @@ messages.push({
   ]
 });
 
-// one that's not multipart, just for kicks.
-// verify that it ducks as a multipart message with one part.
-// messages.push({
-//   headers: { "content-type" : "text/plain" },
-//   body : "Hello, world!",
-// 
-//   // not much to say about this one, since it's just
-//   // validating that a part was created, not that it has
-//   // any particular properties.
-//   expect : [{}]
-// });
-
 // An actual email message sent from felixge to isaacs.
 // Addresses and signatures obscured, but the unicycle pic is preserved for posterity.
 messages.push({
