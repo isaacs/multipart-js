@@ -15,7 +15,14 @@ var multipart = require("../lib/multipart")
     }
   , messages = fixture.messages
   , p = multipart.parser()
+  , expect
+  , e
   ;
+
+p.onPartBegin = function (part) {
+  testPart(expect[e++], part);
+}
+
 for (var i = 0, l = messages.length; i < l; i ++) {
   var message = messages[i]
     , expect = message.expect
@@ -23,14 +30,23 @@ for (var i = 0, l = messages.length; i < l; i ++) {
     , body = message.body
     , b = ""
     , c = 0
-    // , p = multipart.parser()
     ;
-  p.onpartbegin = function (part) {
-    testPart(expect[e++], part);
-  }
-  // sys.debug("test: "+sys.inspect(message.headers));
   p.headers = message.headers;
   while (b = body.charAt(c++)) p.write(b);
-  sys.debug("did "+c+" characters");
   p.close();
 }
+
+// again, but this time, instead of using the headers, just set the boundary.
+for (var i = 0, l = messages.length; i < l; i ++) {
+  var message = messages[i]
+    , expect = message.expect
+    , e = 0
+    , body = message.body
+    , b = ""
+    , c = 0
+    ;
+  p.boundary = message.boundary;
+  while (b = body.charAt(c++)) p.write(b);
+  p.close();
+}
+

@@ -50,6 +50,7 @@ messages.push({
     { filename : "hello4.txt" },
     { filename : "hello-outer.txt" }
   ],
+  boundary : "outer",
   headers : {
     "Content-Type":"multipart/mixed; boundary=outer"
   }, body : [
@@ -137,6 +138,7 @@ messages.push({
   headers : {
     "Content-Type": "multipart/form-data; boundary=AaB03x",
   },
+  boundary : "AaB03x",
   body : [
     "--AaB03x",
     "content-disposition: form-data; name=\"reply\"",
@@ -199,6 +201,7 @@ messages.push({
     {}, // the second bit, text/html
     { name : "unicycle.jpg", filename : "unicycle.jpg" }
   ],
+  boundary : "0016e6d99d0572dfaf047eb9ac2e",
   body : [
     "--0016e6d99d0572dfaf047eb9ac2e", // beginpart->header
     "Content-Type: multipart/alternative; boundary=0016e6d99d0572dfa5047eb9ac2c", // headers. isMultipart

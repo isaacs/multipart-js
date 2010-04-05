@@ -26,10 +26,14 @@ errorMessage = "";
 lastChunk = "";
 
 function handleError (err) {
-	assert.notEqual(err.message, undefined, "should pass Error object to onerror handler");
+	assert.notEqual(err.message, undefined, "should pass Error object to onError handler");
 	errorMessage = err.message;
 	output("emitted error: " + errorMessage);
 	errorHandlerCalled = true;
+}
+function handleErrorCleanup (err) {
+  handleError(err);
+  delete this.error;
 }
 
 function handleData (chunk) {
@@ -37,13 +41,13 @@ function handleData (chunk) {
 	output("emitted data");
 }
 
-writer.onerror = handleError;
-writer.ondata = handleData;
+writer.onError = handleError;
+writer.onData = handleData;
 
 sys.debug("Test some general error handling.")
 sys.debug("Wrong - write a part without setting boundary...");
 writer.partBegin(goodSimplePart);
-assert.ok(errorHandlerCalled, "should emit onerror if part written without boundary");
+assert.ok(errorHandlerCalled, "should emit onError if part written without boundary");
 
 sys.debug("Fix the last error.  Set the boundary property.");
 writer.boundary  = "boundary";
