@@ -8,7 +8,7 @@ var messages = exports.messages = [];
 var bad = exports.badMessages = [];
 
 var longString = "";
-for (var i = 0; i < (16*1024); i ++) longString += Math.random();
+for (var i = 0; i < (1024*1024); i ++) longString += Math.random();
 
 // content before the first boundary
 bad.push({
@@ -158,15 +158,15 @@ messages.push({
 
 // one that's not multipart, just for kicks.
 // verify that it ducks as a multipart message with one part.
-messages.push({
-  headers: { "content-type" : "text/plain" },
-  body : "Hello, world!",
-
-  // not much to say about this one, since it's just
-  // validating that a part was created, not that it has
-  // any particular properties.
-  expect : [{}]
-});
+// messages.push({
+//   headers: { "content-type" : "text/plain" },
+//   body : "Hello, world!",
+// 
+//   // not much to say about this one, since it's just
+//   // validating that a part was created, not that it has
+//   // any particular properties.
+//   expect : [{}]
+// });
 
 // An actual email message sent from felixge to isaacs.
 // Addresses and signatures obscured, but the unicycle pic is preserved for posterity.
