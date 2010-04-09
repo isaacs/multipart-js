@@ -8,7 +8,7 @@ var messages = exports.messages = [];
 var bad = exports.badMessages = [];
 
 var longString = "";
-for (var i = 0; i < (16*1024); i ++) longString += Math.random();
+for (var i = 0; i < (1024*1024); i ++) longString += Math.random();
 
 // content before the first boundary
 bad.push({
@@ -50,6 +50,7 @@ messages.push({
     { filename : "hello4.txt" },
     { filename : "hello-outer.txt" }
   ],
+  boundary : "outer",
   headers : {
     "Content-Type":"multipart/mixed; boundary=outer"
   }, body : [
@@ -137,6 +138,7 @@ messages.push({
   headers : {
     "Content-Type": "multipart/form-data; boundary=AaB03x",
   },
+  boundary : "AaB03x",
   body : [
     "--AaB03x",
     "content-disposition: form-data; name=\"reply\"",
@@ -154,18 +156,6 @@ messages.push({
     { name : "reply" },
     { name : "fileupload", filename : "dj.jpg" }
   ]
-});
-
-// one that's not multipart, just for kicks.
-// verify that it ducks as a multipart message with one part.
-messages.push({
-  headers: { "content-type" : "text/plain" },
-  body : "Hello, world!",
-
-  // not much to say about this one, since it's just
-  // validating that a part was created, not that it has
-  // any particular properties.
-  expect : [{}]
 });
 
 // An actual email message sent from felixge to isaacs.
@@ -211,6 +201,7 @@ messages.push({
     {}, // the second bit, text/html
     { name : "unicycle.jpg", filename : "unicycle.jpg" }
   ],
+  boundary : "0016e6d99d0572dfaf047eb9ac2e",
   body : [
     "--0016e6d99d0572dfaf047eb9ac2e", // beginpart->header
     "Content-Type: multipart/alternative; boundary=0016e6d99d0572dfa5047eb9ac2c", // headers. isMultipart
