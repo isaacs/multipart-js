@@ -710,3 +710,36 @@ messages.push({
     ""
   ].join("\r\n")
 });
+
+
+exports.aSimpleMessage = {
+  headers: {
+    "Content-Type": "multipart/form-data; boundary=AaB03x",
+  },
+  boundary : "AaB03x",  
+  parts: [ {
+    part: { 
+      "type": "form-data", "name": "test"
+    }
+    , body: "hello"
+    , encoded: [
+        "--AaB03x"
+        , "content-disposition: form-data; name=\"test\""
+        , ""
+        , "hello"
+      ].join(",")
+  }
+  , { 
+    part: { 
+      "type": "form-data", "name": "test1"
+    }
+    , body: "hello1"
+    , encoded: [
+        "--AaB03x"
+        , "content-disposition: form-data; name=\"test1\""
+        , ""
+        , "hello1"
+      ].join(",")
+  }
+  ]
+};
