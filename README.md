@@ -6,6 +6,9 @@ A JavaScript library for parsing and writing multipart messages.
 
 Pre-pre-alpha.  Almost nothing is here, and what is here is likely completely broken.
 
+If you are asking about this, you probably ought to check out Felix's
+[node-formidable](https://github.com/felixge/node-formidable) library.
+
 ## Usage
 
 If you're familiar with [sax-js](http://github.com/isaacs/sax-js), then most of this should
